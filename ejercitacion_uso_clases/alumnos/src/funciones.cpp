@@ -72,7 +72,7 @@ bool mismos_elementos(vector<int> a, vector<int> b) {
 
 // Ejercicio 4
 bool mismos_elementos_v2(vector<int> a, vector<int> b) {
-    return true;
+    return __vector_to_set(a) == __vector_to_set(b);
 }
 
 // Ejercicio 5
