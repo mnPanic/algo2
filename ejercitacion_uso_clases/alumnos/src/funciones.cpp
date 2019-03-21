@@ -133,11 +133,18 @@ set<int> interseccion(set<int> a, set<int> b) {
             res.insert(elem);
         }
     }
+    return res;
 }
 
 // Ejercicio 8
 map<int, set<int>> agrupar_por_unidades(vector<int> s) {
-    return map<int, set<int>>();
+    map<int, set<int>> res;
+
+    for(int elem : s) {
+        res[elem % 10].insert(elem);
+    }
+
+    return res;
 }
 
 // Ejercicio 9
