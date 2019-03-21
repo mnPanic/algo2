@@ -148,8 +148,23 @@ map<int, set<int>> agrupar_por_unidades(vector<int> s) {
 }
 
 // Ejercicio 9
+char __obtener_traduccion(char c, vector<pair<char, char>> tr) {
+    // Si no encuentro traducción devuelvo el mismo
+    char traduccion = c;
+    for (pair<char, char> entry : tr) {
+        if (entry.first = c) {
+            traduccion = entry.second;
+        }
+    }
+    return traduccion;
+}
+
 vector<char> traducir(vector<pair<char, char>> tr, vector<char> str) {
-    return vector<char>();
+    vector<char> str_traducido;
+    for (char c : str) {
+        str_traducido.push_back(__obtener_traduccion(c, tr));
+    }
+    return str_traducido;
 }
 
 // Ejercicio 10
