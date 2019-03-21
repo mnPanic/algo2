@@ -100,7 +100,20 @@ map<int, int> contar_apariciones(vector<int> s) {
 
 // Ejercicio 6
 vector<int> filtrar_repetidos(vector<int> s) {
-    return vector<int>();
+    vector<int> res;
+
+    map<int, int> apariciones = contar_apariciones(s);
+
+    for(pair<int, int> p : apariciones) {
+        int elem = p.first;
+        int ap = p.second;
+
+        if (ap == 1) {
+            res.push_back(elem);
+        }
+    }
+
+    return res;
 }
 
 // Ejercicio 7
