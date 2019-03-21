@@ -76,8 +76,26 @@ bool mismos_elementos_v2(vector<int> a, vector<int> b) {
 }
 
 // Ejercicio 5
+int __apariciones(int elem, vector<int> s) {
+    int ap = 0;
+
+    for(int otro : s) {
+        if(otro == elem) {
+            ap++;
+        }
+    }
+
+    return ap;
+}
+
 map<int, int> contar_apariciones(vector<int> s) {
-    return map<int, int>();
+    map<int, int> res;
+
+    for(int elem : s) {
+        res[elem] = __apariciones(elem, s);
+    }
+
+    return res;
 }
 
 // Ejercicio 6
