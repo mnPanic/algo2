@@ -117,8 +117,22 @@ vector<int> filtrar_repetidos(vector<int> s) {
 }
 
 // Ejercicio 7
+bool __contiene(set<int> s, int elem) {
+    for(int otro : s) {
+        if (otro == elem) {
+            return true;
+        }
+    }
+
+    return false;
+}
 set<int> interseccion(set<int> a, set<int> b) {
-    return set<int>();
+    set<int> res;
+    for (int elem : a) {
+        if(__contiene(b, elem)){
+            res.insert(elem);
+        }
+    }
 }
 
 // Ejercicio 8
