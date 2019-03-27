@@ -87,16 +87,23 @@ class Fecha {
 };
 
 // Ejercicio 3: Constructor y métodos de Fecha
-Fecha::Fecha(Anio anio, Mes mes, Dia dia) {
+Fecha::Fecha(Anio anio, Mes mes, Dia dia)
+    : _anio(anio), _mes(mes), _dia(dia) {
 }
 
 Anio Fecha::anio() const {
+    return _anio;
 }
 
 // Fecha::mes()
+Mes Fecha::mes() const {
+    return _mes;
+}
 
 // dia
-
+Dia Fecha::dia() const {
+    return _dia;
+}
 
 // Ejercicio 4: comparadores
 bool Fecha::operator==(Fecha o) const {
