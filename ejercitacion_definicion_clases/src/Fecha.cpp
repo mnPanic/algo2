@@ -28,6 +28,11 @@ bool divisible(int a, int b) {
 }
 
 bool esBisiesto(Anio anio) {
+  bool bisiesto =
+          divisible(anio, 400) or
+          (divisible(anio, 4) and !divisible(anio, 100));
+
+  return bisiesto;
 }
 
 // Ejercicio 2: diasEnMes
