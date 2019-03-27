@@ -2,6 +2,9 @@
 // PRELUDIO //
 //////////////
 
+#include <map>
+
+
 // Typedef
 typedef int Anio;
 typedef int Mes;
@@ -36,8 +39,24 @@ bool esBisiesto(Anio anio) {
 }
 
 // Ejercicio 2: diasEnMes
-//
-//
+int diasEnMes(Anio anio, Mes mes) {
+  std::map<Mes, Dia> diasPorMes = {
+          {ENERO,       31},
+          {FEBRERO,     esBisiesto(anio)? 29 : 28},
+          {MARZO,       31},
+          {ABRIL,       30},
+          {MAYO,        31},
+          {JUNIO,       30},
+          {JULIO,       31},
+          {AGOSTO,      31},
+          {SEPTIEMBRE,  30},
+          {OCTUBRE,     31},
+          {NOVIEMBRE,   30},
+          {DICIEMBRE,   31},
+  };
+
+  return diasPorMes[mes];
+}
 
 // Para ejercicio 6
 class Periodo;
@@ -58,7 +77,7 @@ class Fecha {
 
  private:
   Anio _anio;
-  Mes _mes; 
+  Mes _mes;
   Dia _dia;
 
   // Ejercicio 7: sumar a fecha
