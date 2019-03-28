@@ -65,6 +65,7 @@ class Fecha {
  public:
   // pre: anio > 0, mes \in [1, 12], dia \in [1, diasEnMes(anio, mes)]
   Fecha(Anio anio, Mes mes, Dia dia);
+  Fecha(Fecha &otra);
 
   Anio anio() const;
   Mes mes() const;
@@ -115,6 +116,10 @@ void Fecha::sumar_dias(int dias) {
 Fecha::Fecha(Anio anio, Mes mes, Dia dia)
     : _anio(anio), _mes(mes), _dia(dia) {
 }
+
+Fecha::Fecha(Fecha &otra)
+    : Fecha(otra._anio, otra._mes, otra._dia) {}
+
 
 Anio Fecha::anio() const {
     return _anio;
@@ -193,3 +198,31 @@ void Fecha::sumar_periodo(Periodo p) {
 
 
 // Ejercicio 8: clase Intervalo
+
+class Intervalo {
+private:
+    Fecha _desde, _hasta;
+
+public:
+    Intervalo(Fecha desde, Fecha hasta);
+
+    Fecha desde() const;
+    Fecha hasta() const;
+    int enDias() const;
+};
+
+Intervalo::Intervalo(Fecha desde, Fecha hasta)
+    : _desde(desde), _hasta(hasta) {}
+
+Fecha Intervalo::desde() const {
+    return _desde;
+}
+
+Fecha Intervalo::hasta() const {
+    return _hasta;
+}
+
+int Intervalo::enDias() const {
+    // TODO
+    return 0;
+}
