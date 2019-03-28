@@ -74,6 +74,7 @@ class Fecha {
   bool operator<(Fecha o) const;
 
   // Ejercicio 7: sumar período a fecha
+  void sumar_periodo(Periodo p);
 
  private:
   Anio _anio;
@@ -85,6 +86,30 @@ class Fecha {
   void sumar_meses(int meses);
   void sumar_dias(int dias);
 };
+
+void Fecha::sumar_anios(int anios) {
+    _anio += anios;
+}
+
+void Fecha::sumar_meses(int meses) {
+    int meses_en_anio = 12;
+    _mes += meses;
+    while(_mes > meses_en_anio) {
+        _mes -= meses_en_anio;
+        sumar_anios(1);
+    }
+}
+
+void Fecha::sumar_dias(int dias) {
+    int dias_en_mes = diasEnMes(_anio, _mes);
+    _dia += dias;
+    while(_dia > dias_en_mes) {
+        _dia -= dias_en_mes;
+        sumar_meses(1);
+        dias_en_mes = diasEnMes(_anio, _mes);
+    }
+}
+
 
 // Ejercicio 3: Constructor y métodos de Fecha
 Fecha::Fecha(Anio anio, Mes mes, Dia dia)
@@ -158,6 +183,12 @@ int Periodo::meses() const {
 
 int Periodo::dias() const {
     return _dias;
+}
+
+void Fecha::sumar_periodo(Periodo p) {
+    sumar_anios(p.anios());
+    sumar_meses(p.meses());
+    sumar_dias(p.dias());
 }
 
 
