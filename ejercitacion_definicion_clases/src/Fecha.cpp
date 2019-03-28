@@ -107,9 +107,25 @@ Dia Fecha::dia() const {
 
 // Ejercicio 4: comparadores
 bool Fecha::operator==(Fecha o) const {
+    bool equal =
+        _dia == o._dia and
+        _mes == o._mes and
+        _anio == o._anio;
+
+    return equal;
 }
 
 // Fecha::operator<
+
+bool Fecha::operator<(Fecha o) const {
+    bool lt =
+        _anio < o._anio or
+        ((_anio == o._anio) and
+        ((_mes < o._mes) or
+         (_mes == o._mes and _dia < o._dia)));
+
+    return lt; // lower than
+}
 
 
 // Ejercicio 5: comparador distinto
