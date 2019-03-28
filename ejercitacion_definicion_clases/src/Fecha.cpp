@@ -135,7 +135,30 @@ bool operator!=(Fecha f1, Fecha f2) {
 
 // Ejercicio 6: clase período
 class Periodo {
+private:
+    int _anios, _meses, _dias;
+
+public:
+    Periodo(int anios, int meses, int dias);
+    int anios() const;
+    int meses() const;
+    int dias() const;
 };
+
+Periodo::Periodo(int anios, int meses, int dias)
+    : _anios(anios), _meses(meses), _dias(dias){}
+
+int Periodo::anios() const {
+    return _anios;
+}
+
+int Periodo::meses() const {
+    return _meses;
+}
+
+int Periodo::dias() const {
+    return _dias;
+}
 
 
 // Ejercicio 8: clase Intervalo
