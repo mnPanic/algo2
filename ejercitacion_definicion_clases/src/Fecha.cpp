@@ -130,6 +130,7 @@ bool Fecha::operator<(Fecha o) const {
 
 // Ejercicio 5: comparador distinto
 bool operator!=(Fecha f1, Fecha f2) {
+    return !(f1==f2);
 }
 
 // Ejercicio 6: clase período
