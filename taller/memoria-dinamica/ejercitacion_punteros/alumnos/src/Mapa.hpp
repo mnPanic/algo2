@@ -177,7 +177,10 @@ Mapa<T>::Mapa(const Mapa<T>& otro) {
 
 template <class T>
 Mapa<T>::~Mapa() {
-	// COMPLETAR
+	for (int i = 0; i < _ancho; i++) {
+		delete[] _grilla[i];
+	}
+	delete[] _grilla;
 }
 
 template <class T>
