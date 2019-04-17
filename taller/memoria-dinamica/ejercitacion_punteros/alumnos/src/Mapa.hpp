@@ -63,22 +63,43 @@ private:
 	// En este ejercicio no está permitido usar vector ni
 	// otras clases de la STL. El objetivo es hacerlo a mano
 	// usando punteros.
+	T** _grilla;
+	int _ancho;
+	int _alto;
+
+	int _cursorX;
+	int _cursorY;
 };
 
 template <class T>
-Mapa<T>::Mapa(int ancho, int alto)
-{
-	// COMPLETAR
+Mapa<T>::Mapa(int ancho, int alto, const T& def) {
+
+	// El cursor comienza en (0, 0)
+	_cursorX = 0;
+	_cursorY = 0;
+
+	_ancho = ancho;
+	_alto = alto;
+
+	_grilla = new T*[ancho];
+
+	for (int i = 0; i < ancho; i++) {
+		_grilla[i] = new T[alto];
+
+		for (int j = 0; j < alto; j++) {
+			_grilla[i][j] = def;
+		}
+	}
 }
 
 template <class T>
 int Mapa<T>::ancho() const {
-	// COMPLETAR
+	return _ancho;
 }
 
 template <class T>
 int Mapa<T>::alto() const {
-	// COMPLETAR
+	return _alto;
 }
 
 template <class T>
