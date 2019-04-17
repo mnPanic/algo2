@@ -63,20 +63,35 @@ private:
 	// En este ejercicio no está permitido usar vector ni
 	// otras clases de la STL. El objetivo es hacerlo a mano
 	// usando punteros.
+
+	struct _Coordenada {
+		int x;
+		int y;
+	};
+
+	_Coordenada _obtener_desplazamiento(Direccion d);
+	_Coordenada _make_coord(int x, int y);
 	T** _grilla;
 	int _ancho;
 	int _alto;
 
-	int _cursorX;
-	int _cursorY;
+	_Coordenada _cursor;
 };
+
+template <class T>
+typename Mapa<T>::_Coordenada Mapa<T>::_make_coord(int x, int y) {
+	_Coordenada c;
+	c.x = x;
+	c.y = y;
+
+	return c;
+}
 
 template <class T>
 Mapa<T>::Mapa(int ancho, int alto, const T& def) {
 
 	// El cursor comienza en (0, 0)
-	_cursorX = 0;
-	_cursorY = 0;
+	_cursor = _make_coord(0, 0);
 
 	_ancho = ancho;
 	_alto = alto;
@@ -104,12 +119,54 @@ int Mapa<T>::alto() const {
 
 template <class T>
 T& Mapa<T>::valor() {
-	// COMPLETAR
+	return _grilla[_cursor.x][_cursor.y];
+}
+
+template <class T>
+typename Mapa<T>::_Coordenada Mapa<T>::_obtener_desplazamiento(Direccion direccion) {
+	_Coordenada desplazamiento;
+	// Si pudiese usar std usaría un mapa.
+	switch(direccion){
+		case NORTE:
+			desplazamiento = _make_coord(0, 1);
+			break;
+		case SUR:
+			desplazamiento = _make_coord(0, -1);
+			break;
+		case ESTE:
+			desplazamiento = _make_coord(1, 0);
+			break;
+		case OESTE:
+			desplazamiento = _make_coord(-1, 0);
+			break;
+		default:
+			desplazamiento = _make_coord(0, 0);
+	}
+
+	return desplazamiento;
+}
+
+int mod(int a, int b) {
+	if (a < 0) {
+		while (a <= b) {
+			a += b;
+		}
+	}
+	if (a >= 0) {
+		while (a >= b) {
+			a -= b;
+		}
+	}
+
+	return a;
 }
 
 template <class T>
 void Mapa<T>::mover(Direccion direccion) {
-	// COMPLETAR
+	_Coordenada desp = _obtener_desplazamiento(direccion);
+
+	_cursor.x = mod((_cursor.x + desp.x), _ancho);
+	_cursor.y = mod((_cursor.y + desp.y), _alto);
 }
 
 
