@@ -189,9 +189,31 @@ Mapa<T>::~Mapa() {
 	delete[] _grilla;
 }
 
+// Otra forma sería definir el operador= y crear un constructor vacío privado, y así se usaría en el constructor por copia.
 template <class T>
 Mapa<T>& Mapa<T>::operator=(const Mapa<T>& otro) {
-	// COMPLETAR
+
+	T** tmp = nullptr;
+	if (_ancho != otro._ancho) {
+		tmp = _grilla;
+		_grilla = new T*[otro._ancho];
+	}
+
+	for(int i = 0; i < _ancho; i++) {
+		for (int j = 0; j < _alto; j++) {
+			if (_alto != otro._alto) {
+				delete[] _grilla[i];
+				_grilla[i] = new T[_alto];
+			}
+			_grilla[i][j] = otro._grilla[i][j];
+		}
+	}
+	_cursor = otro._cursor;
+
+	if (tmp != nullptr) {
+		delete[] tmp;
+	}
+	return *this;
 }
 
 #endif
