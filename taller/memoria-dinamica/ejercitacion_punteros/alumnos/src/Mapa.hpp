@@ -171,8 +171,14 @@ void Mapa<T>::mover(Direccion direccion) {
 
 
 template <class T>
-Mapa<T>::Mapa(const Mapa<T>& otro) {
-	// COMPLETAR
+Mapa<T>::Mapa(const Mapa<T>& otro) :
+	Mapa(otro._ancho, otro._alto, otro._grilla[otro._cursor.x][otro._cursor.y]){
+	for(int i = 0; i < _ancho; i++) {
+		for (int j = 0; j < _alto; j++) {
+			_grilla[i][j] = otro._grilla[i][j];
+		}
+	}
+	_cursor = otro._cursor;
 }
 
 template <class T>
