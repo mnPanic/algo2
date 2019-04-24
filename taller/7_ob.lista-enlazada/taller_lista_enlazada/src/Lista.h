@@ -101,7 +101,17 @@ private:
     Nodo* _prim;
     Nodo* _ult;
 
+    /**
+     * Busca el i-ésimo nodo y devuelve un puntero a el.
+     * @param i El indice a buscar.
+     * @return Puntero al i-ésimo nodo.
+     */
     Nodo* _iesimo_nodo(Nat i) const;
+
+    /**
+     * Elimina todos los nodos.
+     */
+    void _eliminar_nodos();
 };
 
 #include "Lista.hpp"

@@ -12,12 +12,11 @@ Lista<T>::Lista(const Lista<T>& l) : Lista() {
 
 template <typename T>
 Lista<T>::~Lista() {
-    // Completar
+    _eliminar_nodos();
 }
 
 template <typename T>
 Lista<T>& Lista<T>::operator=(const Lista<T>& aCopiar) {
-    // Completar
     return *this;
 }
 
@@ -137,4 +136,17 @@ T& Lista<T>::iesimo(Nat i) {
 template <typename T>
 void Lista<T>::mostrar(ostream& o) {
     // Completar
+}
+
+template <class T>
+void Lista<T>::_eliminar_elementos() {
+    Nodo* actual = _prim;
+    while(actual) {
+        // Me guardo temporalmente el siguiente para no perderlo
+        Nodo* sig = actual->sig;
+        delete actual;
+
+        // Seteo el nuevo actual
+        actual = sig;
+    }
 }
