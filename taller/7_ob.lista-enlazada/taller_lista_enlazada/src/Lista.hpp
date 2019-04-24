@@ -35,11 +35,32 @@ void Lista<T>::agregarAdelante(const T& elem) {
     if(prim_anterior != NULL) {
         prim_anterior->prev = _prim;
     }
+
+    // Si no hay ultimo, lo agrego como tal
+    if(_ult == NULL) {
+        _ult = nuevo;
+    }
 }
 
 template <typename T>
 void Lista<T>::agregarAtras(const T& elem) {
-    // Completar
+    // Obtengo el ultimo anterior
+    Nodo* ult_anterior = _ult;
+
+    // Creo el nuevo nodo que tiene como anterior al anterior previo
+    Nodo* nuevo = new Nodo(elem, ult_anterior, NULL);
+    // Lo pongo como ultimo
+    _ult = nuevo;
+
+    // Si habia ultimo, hago que su siguiente sea el nuevo
+    if (ult_anterior != NULL) {
+        ult_anterior->sig = _ult;
+    }
+
+    // Si no hay primero, lo agrego como tal
+    if(_prim == NULL) {
+        _prim = nuevo;
+    }
 }
 
 template <typename T>
