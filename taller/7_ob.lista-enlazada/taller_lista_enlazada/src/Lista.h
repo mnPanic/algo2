@@ -90,10 +90,16 @@ public:
 private:
 
     struct Nodo {
-        // Completar
+        T valor;
+        Nodo* prev;
+        Nodo* sig;
+
+        Nodo(T valor, Nodo* prev, Nodo* sig) :
+            valor(valor), prev(prev), sig(sig){}
     };
 
-    // Completar
+    Nodo* _prim;
+    Nodo* _ult;
 };
 
 #include "Lista.hpp"
