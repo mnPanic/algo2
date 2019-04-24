@@ -14,7 +14,9 @@ public:
 	Valor obtener(Clave k) const;
 	void borrar(Clave k);
 	std::vector<Clave> claves() const;
-	
+
+
+	bool operator==(Diccionario o);
 private:
 	struct Asociacion {
 		Clave clave;

@@ -78,7 +78,27 @@ TEST(diccionario, ej6_claves) {
 
 #if EJ >= 7
 
-// Completar para el ejercicio 7
+TEST(diccionario, ej7_claves) {
+	Diccionario d1;
+	d1.definir(2, 4);
+	d1.definir(5, 6);
+	d1.definir(1, 123);
+
+	Diccionario d2;
+	d2.definir(5, 6);
+	d2.definir(1, 1234);
+
+	// No deberían ser iguales
+	ASSERT_FALSE(d1 == d2);
+
+	d1.borrar(2);
+	// Todavía tampoco
+	ASSERT_FALSE(d1 == d2);
+
+	d1.definir(1, 1234);
+	// Deberían ser iguales
+	ASSERT_TRUE(d1 == d2);
+}
 
 #endif
 

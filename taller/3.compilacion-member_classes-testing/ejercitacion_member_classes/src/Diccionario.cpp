@@ -54,3 +54,15 @@ std::vector<Clave> Diccionario::claves() const {
 
     return claves;
 }
+
+bool Diccionario::operator==(Diccionario o) {
+    bool eq = true;
+    for (Asociacion a : _asociaciones) {
+        if (!(o.def(a.clave) && o.obtener(a.clave) == a.valor)){
+            eq = false;
+            break;
+        }
+    }
+
+    return eq;
+}
