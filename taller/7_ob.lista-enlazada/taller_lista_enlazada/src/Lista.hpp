@@ -65,7 +65,32 @@ void Lista<T>::agregarAtras(const T& elem) {
 
 template <typename T>
 void Lista<T>::eliminar(Nat i) {
-    // Completar
+    Nodo* iesimo = _iesimo_nodo(i);
+    // Supongo que i esta en rango y iesimo no es NULL
+
+    // Cambio los punteros
+    Nodo* prev_de_iesimo = iesimo->prev;
+    Nodo* sig_de_iesimo = iesimo->sig;
+
+    if (prev_de_iesimo) {
+        prev_de_iesimo->sig = sig_de_iesimo;
+    }
+
+    if (sig_de_iesimo) {
+        sig_de_iesimo->prev = prev_de_iesimo;
+    }
+
+    // Si es el primero, tengo que cambiar el prim
+    if (_prim == iesimo) {
+        _prim = sig_de_iesimo;
+    }
+    // Si es el ultimo, tengo que cambiar el ult
+    if (_ult == iesimo) {
+        _ult = prev_de_iesimo;
+    }
+
+    // Lo borro
+    delete(iesimo);
 }
 
 template <typename T>
