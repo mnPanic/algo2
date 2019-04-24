@@ -1,3 +1,5 @@
+#include "Periodo.h"
+
 // Typedef
 typedef int Anio;
 typedef int Mes;
