@@ -32,12 +32,12 @@ void Lista<T>::agregarAdelante(const T& elem) {
     _prim = nuevo;
 
     // Si habia primero, hago que su previo sea el nuevo
-    if(prim_anterior != NULL) {
+    if(prim_anterior) {
         prim_anterior->prev = _prim;
     }
 
     // Si no hay ultimo, lo agrego como tal
-    if(_ult == NULL) {
+    if(!_ult) {
         _ult = nuevo;
     }
 }
@@ -53,12 +53,12 @@ void Lista<T>::agregarAtras(const T& elem) {
     _ult = nuevo;
 
     // Si habia ultimo, hago que su siguiente sea el nuevo
-    if (ult_anterior != NULL) {
+    if (ult_anterior) {
         ult_anterior->sig = _ult;
     }
 
     // Si no hay primero, lo agrego como tal
-    if(_prim == NULL) {
+    if(!_prim) {
         _prim = nuevo;
     }
 }
@@ -72,7 +72,7 @@ template <typename T>
 int Lista<T>::longitud() const {
     Nodo* actual = _prim;
     int l = 0;
-    while(actual != NULL){
+    while(actual){
         l++;
         actual = actual->sig;
     }
@@ -85,7 +85,7 @@ typename Lista<T>::Nodo* Lista<T>::_iesimo_nodo(Nat i) const {
     int idx_actual = -1;
     Nodo* iesimo = NULL;
     Nodo* nodo_actual = _prim;
-    while(nodo_actual != NULL){
+    while(nodo_actual){
         idx_actual++;
         if (i == idx_actual) {
             iesimo = nodo_actual;
