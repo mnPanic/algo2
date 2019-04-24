@@ -100,6 +100,8 @@ private:
 
     Nodo* _prim;
     Nodo* _ult;
+
+    Nodo* _iesimo_nodo(Nat i) const;
 };
 
 #include "Lista.hpp"

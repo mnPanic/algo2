@@ -60,15 +60,32 @@ int Lista<T>::longitud() const {
 }
 
 template <typename T>
+typename Lista<T>::Nodo* Lista<T>::_iesimo_nodo(Nat i) const {
+    int idx_actual = -1;
+    Nodo* iesimo = NULL;
+    Nodo* nodo_actual = _prim;
+    while(nodo_actual != NULL){
+        idx_actual++;
+        if (i == idx_actual) {
+            iesimo = nodo_actual;
+        }
+        nodo_actual = nodo_actual->sig;
+    }
+
+    return iesimo;
+}
+
+template <typename T>
 const T& Lista<T>::iesimo(Nat i) const {
-    // Completar
-    assert(false);
+    // Supongo que no puede estar fuera de indice, sino daría nullpointer
+    return _iesimo_nodo(i)->valor;
+
 }
 
 template <typename T>
 T& Lista<T>::iesimo(Nat i) {
-    // Completar (hint: es igual a la anterior...)
-    assert(false);
+    // Supongo que no puede estar fuera de indice, sino daría nullpointer
+    return _iesimo_nodo(i)->valor;
 }
 
 template <typename T>
