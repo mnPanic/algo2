@@ -17,6 +17,12 @@ Lista<T>::~Lista() {
 
 template <typename T>
 Lista<T>& Lista<T>::operator=(const Lista<T>& aCopiar) {
+    // Hago un deep copy
+
+    // Elimino los nodos actuales
+    _eliminar_nodos();
+    // Copio los valores
+    _copiar_valores(aCopiar);
     return *this;
 }
 
@@ -139,7 +145,7 @@ void Lista<T>::mostrar(ostream& o) {
 }
 
 template <class T>
-void Lista<T>::_eliminar_elementos() {
+void Lista<T>::_eliminar_nodos() {
     Nodo* actual = _prim;
     while(actual) {
         // Me guardo temporalmente el siguiente para no perderlo
@@ -148,5 +154,17 @@ void Lista<T>::_eliminar_elementos() {
 
         // Seteo el nuevo actual
         actual = sig;
+    }
+    _prim = NULL;
+    _ult = NULL;
+}
+
+template <class T>
+void Lista<T>::_copiar_valores(const Lista<T>& otra) {
+    // Agrego atras todos los nodos de otra a esta
+    Nodo* actual = otra._prim;
+    while(actual) {
+        agregarAtras(actual->valor);
+        actual = actual->sig;
     }
 }

@@ -112,6 +112,13 @@ private:
      * Elimina todos los nodos.
      */
     void _eliminar_nodos();
+
+    /**
+     * Agrega los valores de otra lista.
+     *
+     * @param otra La otra lista.
+     */
+    void _copiar_valores(const Lista<T>& otra);
 };
 
 #include "Lista.hpp"
