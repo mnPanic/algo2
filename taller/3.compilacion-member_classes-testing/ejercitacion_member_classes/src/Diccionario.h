@@ -14,8 +14,14 @@ public:
 	Valor obtener(Clave k) const;
 	
 private:
-	// Completar para el ejercicio 3
-	
+	struct Asociacion {
+		Clave clave;
+		Valor valor;
+	};
+
+	int index_of(Clave k) const;
+
+	std::vector<Asociacion> _asociaciones;
 };
 
 #endif /*__DICCIONARIO_H__*/
