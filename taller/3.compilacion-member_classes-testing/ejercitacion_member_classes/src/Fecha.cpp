@@ -107,35 +107,6 @@ bool operator!=(Fecha f1, Fecha f2) {
   return not (f1 == f2);
 }
 
-class Periodo {
- public:
-  Periodo(int anios, int meses, int dias);
-
-  int anios() const;
-  int meses() const;
-  int dias() const;
-
- private:
-  int _anios;
-  int _meses;
-  int _dias;
-};
-
-Periodo::Periodo(int anios, int meses, int dias) : _anios(anios), 
-    _meses(meses), _dias(dias) {};
-
-int Periodo::anios() const {
-  return _anios;
-}
-
-int Periodo::meses() const {
-  return _meses;
-}
-
-int Periodo::dias() const {
-  return _dias;
-}
-
 void Fecha::ajustar_fecha() {
   while (_mes > 12 || _dia > diasEnMes(_anio, _mes)) {
     if (_mes > 12) {
