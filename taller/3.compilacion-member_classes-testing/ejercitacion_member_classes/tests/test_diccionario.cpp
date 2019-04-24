@@ -37,7 +37,26 @@ TEST(diccionario, ej4_obtener) {
 
 #if EJ >= 5
 
-// Completar para el ejercicio 5
+TEST(diccionario, ej5_borrar) {
+	Diccionario d;
+
+	d.definir(1, 4);
+	d.definir(2, 5);
+	d.definir(6, 11);
+
+	// Borro una clave existente y verifico que:
+	// - NO siga existiendo
+	// - El resto si
+	d.borrar(1);
+	ASSERT_FALSE(d.def(1));
+	ASSERT_EQ(d.obtener(2), 5);
+	ASSERT_EQ(d.obtener(6), 11);
+
+	// Borro una clave inexistente y me aseguro que siga igual
+	d.borrar(12312312);
+	ASSERT_EQ(d.obtener(2), 5);
+	ASSERT_EQ(d.obtener(6), 11);
+}
 
 #endif
 

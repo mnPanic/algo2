@@ -36,3 +36,11 @@ Valor Diccionario::obtener(Clave k) const {
     // Supongo que está definida
     return _asociaciones[index_of(k)].valor;
 }
+
+void Diccionario::borrar(Clave k) {
+    int idx = index_of(k);
+
+    if (idx != -1) {
+        _asociaciones.erase(_asociaciones.begin() + idx);
+    }
+}
