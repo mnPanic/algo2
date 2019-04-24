@@ -1,9 +1,8 @@
 #include "Lista.h"
 
 template <typename T>
-Lista<T>::Lista() {
-    // Completar
-}
+Lista<T>::Lista() :
+    _prim(NULL), _ult(NULL){}
 
 template <typename T>
 Lista<T>::Lista(const Lista<T>& l) : Lista() {
@@ -39,8 +38,14 @@ void Lista<T>::eliminar(Nat i) {
 
 template <typename T>
 int Lista<T>::longitud() const {
-    // Completar
-    return -1;
+    Nodo* actual = _prim;
+    int l = 0;
+    while(actual != NULL){
+        l++;
+        actual = actual->sig;
+    }
+
+    return l;
 }
 
 template <typename T>
