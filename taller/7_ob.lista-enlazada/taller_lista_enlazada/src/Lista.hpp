@@ -23,7 +23,18 @@ Lista<T>& Lista<T>::operator=(const Lista<T>& aCopiar) {
 
 template <typename T>
 void Lista<T>::agregarAdelante(const T& elem) {
-    // Completar
+    // Obtengo el primero anterior
+    Nodo* prim_anterior = _prim;
+
+    // Creo el nodo nuevo que tiene como siguiente al que solia ser el primero
+    Nodo* nuevo = new Nodo(elem, NULL, prim_anterior);
+    // Lo pongo como primero
+    _prim = nuevo;
+
+    // Si habia primero, hago que su previo sea el nuevo
+    if(prim_anterior != NULL) {
+        prim_anterior->prev = _prim;
+    }
 }
 
 template <typename T>
