@@ -62,7 +62,17 @@ TEST(diccionario, ej5_borrar) {
 
 #if EJ >= 6
 
-// Completar para el ejercicio 6
+
+TEST(diccionario, ej6_claves) {
+	// Voy a hacer un test sobreespecificado que tenga el orden normal.
+	Diccionario d;
+
+	d.definir(1, 4);
+	d.definir(2, 5);
+	d.definir(6, 11);
+
+	ASSERT_EQ(d.claves(), std::vector<Clave>({1, 2, 6}));
+}
 
 #endif
 

@@ -44,3 +44,13 @@ void Diccionario::borrar(Clave k) {
         _asociaciones.erase(_asociaciones.begin() + idx);
     }
 }
+
+std::vector<Clave> Diccionario::claves() const {
+    std::vector<Clave> claves;
+
+    for (Asociacion a : _asociaciones) {
+        claves.push_back(a.clave);
+    }
+
+    return claves;
+}

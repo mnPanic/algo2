@@ -13,6 +13,7 @@ public:
 	bool def(Clave k) const;
 	Valor obtener(Clave k) const;
 	void borrar(Clave k);
+	std::vector<Clave> claves() const;
 	
 private:
 	struct Asociacion {
