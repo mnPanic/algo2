@@ -141,7 +141,19 @@ T& Lista<T>::iesimo(Nat i) {
 
 template <typename T>
 void Lista<T>::mostrar(ostream& o) {
-    // Completar
+    o << "[";
+    Nodo* actual = _prim;
+    while(actual) {
+        // Supongo que el valor se puede representar en string
+        o << actual->valor;
+        actual = actual->sig;
+        if (actual) {
+            // Solo agrego la coma si hay un siguiente
+            o << ", ";
+        }
+    }
+
+    o << "]"; // Podría agregar un << endl;
 }
 
 template <class T>
