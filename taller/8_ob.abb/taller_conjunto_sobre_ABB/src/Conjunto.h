@@ -65,12 +65,15 @@ class Conjunto
         // Puntero a la raíz de nuestro árbol.
         Nodo* _raiz;
 
-        // Recorre los nodos en busca de una clave, y frena cuando llega a ella o a NULL.
-        // y devuelve el último nodo antes de frenar.
-        //  - Si está, devuelve el nodo.
-        //  - Si no, devuelve el padre.
-        //  - Si la raiz era NULL, devuelve NULL.
-        typename Conjunto<T>::Nodo* _recorrer_nodos(Conjunto<T>::Nodo*, const T&) const;
+        // Cardinal del conjunto
+        int _cardinal;
+
+        // Recorre los nodos en busca de una clave.
+        // Devuelve true si la encuentra y false sino.
+        bool _pertenece_recorriendo_nodos(Conjunto<T>::Nodo*, const T&) const;
+
+        // Inserta un elemento recorriendo los nodos.
+        void _insertar_recorriendo_nodos(Conjunto<T>::Nodo* &n, const T&);
 
 
 };
