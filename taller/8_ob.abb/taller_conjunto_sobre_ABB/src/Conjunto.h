@@ -66,7 +66,7 @@ class Conjunto
         Nodo* _raiz;
 
         // Cardinal del conjunto
-        int _cardinal;
+        unsigned _cardinal;
 
         // Recorre los nodos en busca de una clave.
         // Devuelve true si la encuentra y false sino.
