@@ -1,3 +1,4 @@
+template <class T>
 Conjunto<T>::Conjunto() : _raiz(NULL) {}
 
 template <class T>
