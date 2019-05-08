@@ -53,7 +53,7 @@ class Conjunto
         struct Nodo
         {
             // El constructor, toma el elemento al que representa el nodo.
-            Nodo(const T& v);
+            Nodo(const T& v): valor(v), izq(NULL), der(NULL){}
             // El elemento al que representa el nodo.
             T valor;
             // Puntero a la raíz del subárbol izquierdo.
