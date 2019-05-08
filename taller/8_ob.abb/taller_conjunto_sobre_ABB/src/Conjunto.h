@@ -75,7 +75,10 @@ class Conjunto
         // Inserta un elemento recorriendo los nodos.
         void _insertar_recorriendo_nodos(Conjunto<T>::Nodo* &n, const T&);
 
-
+        // Devuelve el nodo con el minimo elemento
+        Conjunto<T>::Nodo* _minimo_recorriendo(Conjunto<T>::Nodo* n) const;
+        // Devuelve el nodo con el maximo elemento
+        Conjunto<T>::Nodo* _maximo_recorriendo(Conjunto<T>::Nodo* n) const;
 };
 
 template<class T>
