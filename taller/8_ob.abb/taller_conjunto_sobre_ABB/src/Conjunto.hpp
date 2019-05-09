@@ -55,7 +55,92 @@ void Conjunto<T>::_insertar_recorriendo_nodos(Conjunto<T>::Nodo* &n, const T& cl
 }
 
 template <class T>
-void Conjunto<T>::remover(const T&) {
+void Conjunto<T>::remover(const T& clave) {
+    _remover_recorriendo(_raiz, nullptr, clave);
+}
+
+template <class T>
+void Conjunto<T>::_remover_recorriendo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre, const T& clave) {
+    if (n == nullptr) {
+        // El nodo que estoy buscando no existe.
+        return;
+    }
+
+    if (n->valor == clave) {
+        // Encontré el nodo, lo borro.
+        _remover_nodo(n, padre);
+    } else {
+        // Sigo recorriendo hasta encontrarlo.
+        Conjunto<T>::Nodo** sig = (n->valor > clave)? &(n->izq) : &(n->der);
+        _remover_recorriendo(*sig, &n, clave);
+    }
+}
+
+template <class T>
+void Conjunto<T>::_remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre) {
+    // Supone que n no es null
+    vector<typename Conjunto<T>::Nodo*> hijos = _hijos(n);
+    Conjunto<T>::Nodo* reemplazo = nullptr;
+    switch (hijos.size()) {
+        case 1:
+            // El hijo pasa a ocupar el lugar del padre (n es el padre de hijos)
+            reemplazo = hijos[0];
+            break;
+        case 2:
+            reemplazo = *_inmediato_sucesor(n);
+            break;
+        default:
+            // No es posible
+            break;
+    }
+
+    // Si tenía padre, lo cambio por su reemplazo
+    if (padre != nullptr) {
+        if (n->valor < (*padre)->valor) {
+            (*padre)->izq = reemplazo;
+        } else {
+            (*padre)->der = reemplazo;
+        }
+    } else {
+        // El unico momento en el que no tiene padre es la raiz.
+        // n es la raiz.
+        // La reinicio.
+        _raiz = nullptr;
+    }
+
+    // Borro a n
+    delete(n);
+
+    // Decremento el cardinal
+    _cardinal--;
+
+}
+
+template <class T>
+typename Conjunto<T>::Nodo** Conjunto<T>::_inmediato_sucesor(Conjunto<T>::Nodo* &n) {
+    // Es el mas chico de los mas grandes
+    if (n->der == nullptr) {
+        return nullptr;
+    }
+    return _mas_chico(n->der);
+}
+
+template <class T>
+typename Conjunto<T>::Nodo** Conjunto<T>::_mas_chico(Conjunto<T>::Nodo* &n) {
+    return (n->izq == nullptr)? &n : _mas_chico(n->izq);
+}
+
+template <class T>
+vector<typename Conjunto<T>::Nodo*> Conjunto<T>::_hijos(Conjunto<T>::Nodo* &n) {
+    // Supone que n no es null
+    vector<Conjunto<T>::Nodo*> hijos;
+    if (n->izq != nullptr) {
+        hijos.push_back(n->izq);
+    }
+    if (n->der != nullptr) {
+        hijos.push_back(n->der);
+    }
+    return hijos;
 }
 
 template <class T>

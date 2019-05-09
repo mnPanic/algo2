@@ -59,7 +59,7 @@ class Conjunto
             // Puntero a la raíz del subárbol izquierdo.
             Nodo* izq;
             // Puntero a la raíz del subárbol derecho.
-            Nodo* der; 
+            Nodo* der;
         };
 
         // Puntero a la raíz de nuestro árbol.
@@ -74,6 +74,18 @@ class Conjunto
 
         // Inserta un elemento recorriendo los nodos.
         void _insertar_recorriendo_nodos(Conjunto<T>::Nodo* &n, const T&);
+
+        void _remover_recorriendo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre, const T& clave);
+        void _remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre);
+        // Devuelve un vector con los hijos
+        vector<Conjunto<T>::Nodo*> _hijos(Conjunto<T>::Nodo* &n);
+
+        // El inmediato sucesor es el mas chico de los mas grandes que n.
+        Conjunto<T>::Nodo** _inmediato_sucesor(Conjunto<T>::Nodo* &n);
+
+        // Recorre los hijos del lado izquierdo hasta encontrar el nodo mas chico
+        // (el que no tenga hijo izquierdo)
+        Conjunto<T>::Nodo** _mas_chico(Conjunto<T>::Nodo* &n);
 
         // Devuelve el nodo con el minimo elemento
         Conjunto<T>::Nodo* _minimo_recorriendo(Conjunto<T>::Nodo* n) const;
