@@ -105,7 +105,7 @@ void Conjunto<T>::_remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre
         // El unico momento en el que no tiene padre es la raiz.
         // n es la raiz.
         // La reinicio.
-        _raiz = nullptr;
+        _raiz = reemplazo;
     }
 
     // Borro a n
