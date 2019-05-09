@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <string>
 #include <iostream>
+#include <stack>
 
 using namespace std;
 
@@ -91,6 +92,8 @@ class Conjunto
         Conjunto<T>::Nodo* _minimo_recorriendo(Conjunto<T>::Nodo* n) const;
         // Devuelve el nodo con el maximo elemento
         Conjunto<T>::Nodo* _maximo_recorriendo(Conjunto<T>::Nodo* n) const;
+
+        Conjunto<T>::Nodo* _buscar_con_pila(const T& clave, Conjunto::Nodo* actual, stack<Conjunto<T>::Nodo*> &recorrido);
 };
 
 template<class T>

@@ -145,6 +145,61 @@ vector<typename Conjunto<T>::Nodo*> Conjunto<T>::_hijos(Conjunto<T>::Nodo* &n) {
 
 template <class T>
 const T& Conjunto<T>::siguiente(const T& clave) {
+    stack<Conjunto::Nodo *> recorrido;
+    Conjunto::Nodo* n = _buscar_con_pila(clave, _raiz, recorrido);
+
+    if (n->der != nullptr) {
+        // Caso A: Si tiene subarbol derecho,
+        // devuelvo el mínimo de ese subarbol
+        // (el sucesor inmediato)
+        Conjunto::Nodo** sucesor = _inmediato_sucesor(n);
+        return (*sucesor)->valor;
+    } else {
+        // Caso B: Tengo que subir en el arbol
+        Conjunto::Nodo* padre = recorrido.top();
+        if (n->valor < padre->valor) {
+            // Caso B.1: Es hijo izquierdo
+            // Devuelvo el elemento del padre
+            return padre->valor;
+        } else {
+            // Caso B.2: Es hijo derecho
+            // Subo en el arbol hasta que llego a un nodo que es hijo izquierdo
+            // El padre de ese nodo es el sucesor que busco.
+
+            Conjunto::Nodo* actual = n;
+            // Mientras que es un hijo derecho
+            while(padre->der == actual) {
+                recorrido.pop();
+                // Subo con el padre
+                actual = padre;
+                padre = recorrido.top();
+            }
+            // Retorno el valor del padre del nodo que es hijo izquierdo
+            return padre->valor;
+        }
+    }
+}
+
+template <class T>
+typename Conjunto<T>::Nodo* Conjunto<T>::_buscar_con_pila(const T &clave, Conjunto::Nodo* actual, stack<Conjunto::Nodo *> &recorrido) {
+    // Supongo que la clave pertenece
+
+    if (actual->valor == clave) {
+        // Lo encontré
+        return actual;
+    }
+
+    // Agrego el actual al recorrido
+    recorrido.push(actual);
+
+    // Veo por donde seguir buscando
+    if (actual->valor > clave) {
+        // Busco por la izquierda
+        return _buscar_con_pila(clave, actual->izq, recorrido);
+    } else {
+        // Busco por la derecha
+        return _buscar_con_pila(clave, actual->der, recorrido);
+    }
 }
 
 template <class T>
