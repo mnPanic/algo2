@@ -7,8 +7,39 @@ Conjunto<T>::~Conjunto() {
 }
 
 template <class T>
+typename Conjunto<T>::Nodo* Conjunto<T>::_buscar_con_pila(const T &clave, Conjunto::Nodo* actual, stack<Conjunto::Nodo *> &recorrido) const{
+    if (actual == nullptr) {
+        return nullptr;
+    }
+
+    if (actual->valor == clave) {
+        // Lo encontré
+        return actual;
+    }
+
+    // Agrego el actual al recorrido
+    recorrido.push(actual);
+
+    // Veo por donde seguir buscando
+    if (actual->valor > clave) {
+        // Busco por la izquierda
+        return _buscar_con_pila(clave, actual->izq, recorrido);
+    } else {
+        // Busco por la derecha
+        return _buscar_con_pila(clave, actual->der, recorrido);
+    }
+}
+
+template <class T>
+typename Conjunto<T>::Nodo* Conjunto<T>::_buscar(const T &clave, Conjunto::Nodo* actual) const {
+    stack<Conjunto::Nodo*> s;
+    return _buscar_con_pila(clave, actual, s);
+}
+
+template <class T>
 bool Conjunto<T>::pertenece(const T& clave) const {
-    return _pertenece_recorriendo_nodos(_raiz, clave);
+    Conjunto::Nodo* res = _buscar(clave, _raiz);
+    return (res != nullptr);
 }
 
 template <class T>
@@ -177,28 +208,6 @@ const T& Conjunto<T>::siguiente(const T& clave) {
             // Retorno el valor del padre del nodo que es hijo izquierdo
             return padre->valor;
         }
-    }
-}
-
-template <class T>
-typename Conjunto<T>::Nodo* Conjunto<T>::_buscar_con_pila(const T &clave, Conjunto::Nodo* actual, stack<Conjunto::Nodo *> &recorrido) {
-    // Supongo que la clave pertenece
-
-    if (actual->valor == clave) {
-        // Lo encontré
-        return actual;
-    }
-
-    // Agrego el actual al recorrido
-    recorrido.push(actual);
-
-    // Veo por donde seguir buscando
-    if (actual->valor > clave) {
-        // Busco por la izquierda
-        return _buscar_con_pila(clave, actual->izq, recorrido);
-    } else {
-        // Busco por la derecha
-        return _buscar_con_pila(clave, actual->der, recorrido);
     }
 }
 
