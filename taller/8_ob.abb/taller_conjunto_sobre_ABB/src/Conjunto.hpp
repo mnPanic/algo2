@@ -276,6 +276,23 @@ unsigned int Conjunto<T>::cardinal() const {
 }
 
 template <class T>
-void Conjunto<T>::mostrar(std::ostream&) const {
+void Conjunto<T>::mostrar(std::ostream& out) const {
+    out << std::endl;
+    print(out, "", _raiz, false);
 }
 
+template <class T>
+void Conjunto<T>::print(std::ostream& out, const std::string& prefix, const Conjunto::Nodo* n, bool isLeft) const{
+    if(n != nullptr) {
+        out << prefix;
+
+        out << (isLeft ? "├──" : "└──" );
+
+        // print the value of the node
+        out << n->valor << std::endl;
+
+        // enter the next tree level - left and right branch
+        print(out, prefix + (isLeft ? "│   " : "    "), n->izq, true);
+        print(out, prefix + (isLeft ? "│   " : "    "), n->der, false);
+    }
+}

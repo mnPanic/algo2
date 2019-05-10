@@ -91,6 +91,8 @@ class Conjunto
         Conjunto<T>::Nodo* _maximo_recorriendo(Conjunto<T>::Nodo* n) const;
 
         void _destruir(Conjunto<T>::Nodo* n);
+
+        void print(std::ostream& out, const std::string& prefix, const Conjunto::Nodo* n, bool isLeft) const;
 };
 
 template<class T>
