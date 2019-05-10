@@ -89,6 +89,8 @@ class Conjunto
         Conjunto<T>::Nodo* _minimo_recorriendo(Conjunto<T>::Nodo* n) const;
         // Devuelve el nodo con el maximo elemento
         Conjunto<T>::Nodo* _maximo_recorriendo(Conjunto<T>::Nodo* n) const;
+
+        void _destruir(Conjunto<T>::Nodo* n);
 };
 
 template<class T>

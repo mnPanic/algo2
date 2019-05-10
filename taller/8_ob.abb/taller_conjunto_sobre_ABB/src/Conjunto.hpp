@@ -3,7 +3,18 @@ Conjunto<T>::Conjunto() : _raiz(NULL), _cardinal(0) {}
 
 template <class T>
 Conjunto<T>::~Conjunto() { 
-    // Completar
+    _destruir(_raiz);
+}
+
+template <class T>
+void Conjunto<T>::_destruir(Conjunto<T>::Nodo* n) {
+    if (n != nullptr) {
+        _destruir(n->izq);
+        _destruir(n->der);
+        delete(n);
+    }
+    _cardinal = 0;
+    _raiz = nullptr;
 }
 
 template <class T>
