@@ -65,19 +65,16 @@ class Conjunto
 
         // Puntero a la raíz de nuestro árbol.
         Nodo* _raiz;
-
         // Cardinal del conjunto
         unsigned _cardinal;
 
-        // Recorre los nodos en busca de una clave.
-        // Devuelve true si la encuentra y false sino.
-        bool _pertenece_recorriendo_nodos(Conjunto<T>::Nodo*, const T&) const;
+        // Busca el nodo con la clave especificada, guardando el recorrido.
+        Conjunto<T>::Nodo* _buscar_con_pila(const T& clave, Conjunto::Nodo* actual, stack<Conjunto<T>::Nodo*> &recorrido) const;
 
-        // Inserta un elemento recorriendo los nodos.
-        void _insertar_recorriendo_nodos(Conjunto<T>::Nodo* &n, const T&);
+        // Busca el nodo con la clave especificada
+        Conjunto<T>::Nodo* _buscar(const T& clave, Conjunto::Nodo* actual) const;
 
-        void _remover_recorriendo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre, const T& clave);
-        void _remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre);
+        void _remover_nodo(Conjunto::Nodo* &n, Conjunto::Nodo* &padre);
         // Devuelve un vector con los hijos
         vector<Conjunto<T>::Nodo*> _hijos(Conjunto<T>::Nodo* &n);
 
@@ -93,7 +90,7 @@ class Conjunto
         // Devuelve el nodo con el maximo elemento
         Conjunto<T>::Nodo* _maximo_recorriendo(Conjunto<T>::Nodo* n) const;
 
-        Conjunto<T>::Nodo* _buscar_con_pila(const T& clave, Conjunto::Nodo* actual, stack<Conjunto<T>::Nodo*> &recorrido);
+        void _destruir(Conjunto<T>::Nodo* n);
 };
 
 template<class T>
