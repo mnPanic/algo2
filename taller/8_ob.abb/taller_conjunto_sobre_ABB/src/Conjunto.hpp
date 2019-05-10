@@ -76,28 +76,26 @@ void Conjunto<T>::insertar(const T& clave) {
 
 template <class T>
 void Conjunto<T>::remover(const T& clave) {
-    _remover_recorriendo(_raiz, nullptr, clave);
-}
+    stack<Conjunto::Nodo*> recorrido;
+    Conjunto::Nodo* n = _buscar_con_pila(clave, _raiz, recorrido);
 
-template <class T>
-void Conjunto<T>::_remover_recorriendo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre, const T& clave) {
     if (n == nullptr) {
-        // El nodo que estoy buscando no existe.
+        // La clave no está en el conjunto,
+        // no hago nada
         return;
     }
 
-    if (n->valor == clave) {
-        // Encontré el nodo, lo borro.
-        _remover_nodo(n, padre);
-    } else {
-        // Sigo recorriendo hasta encontrarlo.
-        Conjunto<T>::Nodo** sig = (n->valor > clave)? &(n->izq) : &(n->der);
-        _remover_recorriendo(*sig, &n, clave);
+    // Lo borro
+    Conjunto::Nodo* padre = nullptr;
+    if (!recorrido.empty()) {
+        padre = recorrido.top();
     }
+
+    _remover_nodo(n, padre);
 }
 
 template <class T>
-void Conjunto<T>::_remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre) {
+void Conjunto<T>::_remover_nodo(Conjunto::Nodo* &n, Conjunto::Nodo* &padre) {
     // Supone que n no es null
     vector<typename Conjunto<T>::Nodo*> hijos = _hijos(n);
     Conjunto<T>::Nodo* reemplazo = nullptr;
@@ -116,10 +114,10 @@ void Conjunto<T>::_remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre
 
     // Si tenía padre, lo cambio por su reemplazo
     if (padre != nullptr) {
-        if (n->valor < (*padre)->valor) {
-            (*padre)->izq = reemplazo;
+        if (n->valor < padre->valor) {
+            padre->izq = reemplazo;
         } else {
-            (*padre)->der = reemplazo;
+            padre->der = reemplazo;
         }
     } else {
         // El unico momento en el que no tiene padre es la raiz.
@@ -133,7 +131,6 @@ void Conjunto<T>::_remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre
 
     // Decremento el cardinal
     _cardinal--;
-
 }
 
 template <class T>

@@ -74,8 +74,7 @@ class Conjunto
         // Busca el nodo con la clave especificada
         Conjunto<T>::Nodo* _buscar(const T& clave, Conjunto::Nodo* actual) const;
 
-        void _remover_recorriendo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre, const T& clave);
-        void _remover_nodo(Conjunto<T>::Nodo* &n, Conjunto<T>::Nodo** padre);
+        void _remover_nodo(Conjunto::Nodo* &n, Conjunto::Nodo* &padre);
         // Devuelve un vector con los hijos
         vector<Conjunto<T>::Nodo*> _hijos(Conjunto<T>::Nodo* &n);
 
