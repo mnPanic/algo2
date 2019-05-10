@@ -7,7 +7,7 @@ Conjunto<T>::~Conjunto() {
 }
 
 template <class T>
-typename Conjunto<T>::Nodo* Conjunto<T>::_buscar_con_pila(const T &clave, Conjunto::Nodo* actual, stack<Conjunto::Nodo *> &recorrido) const{
+typename Conjunto<T>::Nodo* Conjunto<T>::_buscar_con_pila(const T &clave, Conjunto::Nodo* actual, stack<Conjunto::Nodo*> &recorrido) const{
     if (actual == nullptr) {
         return nullptr;
     }
@@ -43,46 +43,35 @@ bool Conjunto<T>::pertenece(const T& clave) const {
 }
 
 template <class T>
-bool Conjunto<T>::_pertenece_recorriendo_nodos(Conjunto<T>::Nodo* n, const T& clave) const {
-    if (n == nullptr) {
-        return false;
-    } else {
-        if (n->valor == clave) {
-            return true;
-        } else {
-            // Si la clave es mayor voy por el subarbol derecho,
-            // sino por el izquierdo.
-            Conjunto<T>::Nodo* siguiente = (n->valor < clave)? n->der : n->izq;
-            // Busco en el siguiente
-            return _pertenece_recorriendo_nodos(siguiente, clave);
-        }
-    }
-}
-
-
-template <class T>
 void Conjunto<T>::insertar(const T& clave) {
-    if (!pertenece(clave)) {
-        // Si no pertenece, lo inserto recorriendo los nodos
-        _insertar_recorriendo_nodos(_raiz, clave);
+    stack<Conjunto::Nodo*> recorrido;
+    Conjunto::Nodo* res = _buscar_con_pila(clave, _raiz, recorrido);
+    if (res != nullptr) {
+        // Ya está en el conjunto,
+        // no hago nada.
+        return;
     }
-}
 
-template <class T>
-void Conjunto<T>::_insertar_recorriendo_nodos(Conjunto<T>::Nodo* &n, const T& clave) {
-    // Supongo que nodo no es null
-    if (n == nullptr) {
-        // Si el nodo es null, lo inserto allí
-        n = new Conjunto<T>::Nodo(clave);
-        _cardinal++;
+    if (recorrido.empty()) {
+        // Como no hubo recorrido, no tengo ni raiz.
+        // Lo agrego allí.
+        _raiz = new Conjunto<T>::Nodo(clave);
     } else {
-        // Sino, veo si lo debo insertar a izquierda o derecha
-        if (n->valor > clave) {
-            _insertar_recorriendo_nodos(n->izq, clave);
+        // Tengo al menos un elemento
+
+        // Agrego al nodo nuevo como hijo del último nodo de la búsqueda
+        Conjunto::Nodo* padre = recorrido.top();
+        if (padre->valor > clave) {
+            // Si el padre es mayor, entonces agrego res como hijo izquierdo.
+            padre->izq = new Conjunto<T>::Nodo(clave);
         } else {
-            _insertar_recorriendo_nodos(n->der, clave);
+            // Sino, el padre es menor, entonces agrego res como hijo derecho.
+            padre->der = new Conjunto<T>::Nodo(clave);
         }
     }
+
+    // Incremento el cardinal
+    _cardinal++;
 }
 
 template <class T>
@@ -176,7 +165,7 @@ vector<typename Conjunto<T>::Nodo*> Conjunto<T>::_hijos(Conjunto<T>::Nodo* &n) {
 
 template <class T>
 const T& Conjunto<T>::siguiente(const T& clave) {
-    stack<Conjunto::Nodo *> recorrido;
+    stack<Conjunto::Nodo*> recorrido;
     Conjunto::Nodo* n = _buscar_con_pila(clave, _raiz, recorrido);
 
     if (n->der != nullptr) {
