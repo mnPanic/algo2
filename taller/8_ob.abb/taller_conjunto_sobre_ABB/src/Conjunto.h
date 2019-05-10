@@ -83,12 +83,10 @@ class Conjunto
 
         // Recorre los hijos del lado izquierdo hasta encontrar el nodo mas chico
         // (el que no tenga hijo izquierdo)
-        Conjunto<T>::Nodo** _mas_chico(Conjunto<T>::Nodo* &n);
+        Conjunto<T>::Nodo* _minimo_desde(Conjunto<T>::Nodo* n) const;
 
-        // Devuelve el nodo con el minimo elemento
-        Conjunto<T>::Nodo* _minimo_recorriendo(Conjunto<T>::Nodo* n) const;
         // Devuelve el nodo con el maximo elemento
-        Conjunto<T>::Nodo* _maximo_recorriendo(Conjunto<T>::Nodo* n) const;
+        Conjunto<T>::Nodo* _maximo_desde(Conjunto<T>::Nodo* n) const;
 
         void _destruir(Conjunto<T>::Nodo* n);
 

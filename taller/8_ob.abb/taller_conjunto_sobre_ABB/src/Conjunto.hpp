@@ -145,17 +145,12 @@ void Conjunto<T>::_remover_nodo(Conjunto::Nodo* &n, Conjunto::Nodo* &padre) {
 }
 
 template <class T>
-typename Conjunto<T>::Nodo** Conjunto<T>::_inmediato_sucesor(Conjunto<T>::Nodo* &n) {
+typename Conjunto<T>::Nodo* Conjunto<T>::_inmediato_sucesor(Conjunto<T>::Nodo* &n) {
     // Es el mas chico de los mas grandes
     if (n->der == nullptr) {
         return nullptr;
     }
-    return _mas_chico(n->der);
-}
-
-template <class T>
-typename Conjunto<T>::Nodo** Conjunto<T>::_mas_chico(Conjunto<T>::Nodo* &n) {
-    return (n->izq == nullptr)? &n : _mas_chico(n->izq);
+    return _minimo_desde(n->der);
 }
 
 template <class T>
@@ -180,8 +175,8 @@ const T& Conjunto<T>::siguiente(const T& clave) {
         // Caso A: Si tiene subarbol derecho,
         // devuelvo el mínimo de ese subarbol
         // (el sucesor inmediato)
-        Conjunto::Nodo** sucesor = _inmediato_sucesor(n);
-        return (*sucesor)->valor;
+        Conjunto::Nodo* sucesor = _inmediato_sucesor(n);
+        return sucesor->valor;
     } else {
         // Caso B: Tengo que subir en el arbol
         Conjunto::Nodo* padre = recorrido.top();
@@ -211,63 +206,35 @@ const T& Conjunto<T>::siguiente(const T& clave) {
 template <class T>
 const T& Conjunto<T>::minimo() const {
     // Asumo que el conjunto no es vacío
-    assert(cardinal() > 0);
 
-    return _minimo_recorriendo(_raiz)->valor;
+    return _minimo_desde(_raiz)->valor;
 }
 
 template <class T>
-typename Conjunto<T>::Nodo* Conjunto<T>::_minimo_recorriendo(Conjunto<T>::Nodo* n) const {
-    if (n == nullptr) {
-        return nullptr;
+typename Conjunto<T>::Nodo* Conjunto<T>::_minimo_desde(Conjunto<T>::Nodo* n) const {
+    if (n->izq == nullptr) {
+        return n;
+    } else {
+        return _minimo_desde(n->izq);
     }
-
-    // Hago que el minimo sea la "raiz"
-    Conjunto<T>::Nodo* min = n;
-
-    Conjunto<T>::Nodo* min_izq = _minimo_recorriendo(n->izq);
-    Conjunto<T>::Nodo* min_der = _minimo_recorriendo(n->der);
-
-    if (min_izq != nullptr) {
-        min = (min->valor < min_izq->valor)? min : min_izq;
-    }
-    if (min_der != nullptr) {
-        min = (min->valor < min_der->valor)? min : min_der;
-    }
-
-    return min;
 }
 
 
 template <class T>
 const T& Conjunto<T>::maximo() const {
     // Asumo que el conjunto no es vacío
-    assert(cardinal() > 0);
 
-    return _maximo_recorriendo(_raiz)->valor;
+    return _maximo_desde(_raiz)->valor;
 }
 
 
 template <class T>
-typename Conjunto<T>::Nodo* Conjunto<T>::_maximo_recorriendo(Conjunto<T>::Nodo* n) const {
-    if (n == nullptr) {
-        return nullptr;
+typename Conjunto<T>::Nodo* Conjunto<T>::_maximo_desde(Conjunto<T>::Nodo* n) const {
+    if (n->der == nullptr) {
+        return n;
+    } else {
+        return _maximo_desde(n->der);
     }
-
-    // Hago que el maximo sea la "raiz"
-    Conjunto<T>::Nodo* max = n;
-
-    Conjunto<T>::Nodo* max_izq = _maximo_recorriendo(n->izq);
-    Conjunto<T>::Nodo* max_der = _maximo_recorriendo(n->der);
-
-    if (max_izq != nullptr) {
-        max = (max->valor > max_izq->valor)? max : max_izq;
-    }
-    if (max_der != nullptr) {
-        max = (max->valor > max_der->valor)? max : max_der;
-    }
-
-    return max;
 }
 
 template <class T>
