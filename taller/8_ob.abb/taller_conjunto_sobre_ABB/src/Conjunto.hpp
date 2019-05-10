@@ -97,59 +97,86 @@ void Conjunto<T>::remover(const T& clave) {
     }
 
     // Lo borro
-    Conjunto::Nodo* padre = nullptr;
-    if (!recorrido.empty()) {
-        padre = recorrido.top();
-    }
-
-    _remover_nodo(n, padre);
+    _remover_nodo(n, recorrido);
 }
 
 template <class T>
-void Conjunto<T>::_remover_nodo(Conjunto::Nodo* &n, Conjunto::Nodo* &padre) {
+void Conjunto<T>::_remover_nodo(Conjunto::Nodo* &n, stack<Conjunto::Nodo*> recorrido) {
     // Supone que n no es null
+
+    // Obtengo el padre de n
+    Conjunto::Nodo* padre = nullptr;
+    if (!recorrido.empty()) {
+        padre = recorrido.top();
+        recorrido.pop();
+    }
+
     vector<typename Conjunto<T>::Nodo*> hijos = _hijos(n);
-    Conjunto<T>::Nodo* reemplazo = nullptr;
     switch (hijos.size()) {
+        case 0:
+            // Si tenía padre, lo cambio por su reemplazo
+            if (padre != nullptr) {
+                if (n->valor < padre->valor) {
+                    padre->izq = nullptr;
+                } else {
+                    padre->der = nullptr;
+                }
+            } else {
+                // El unico momento en el que no tiene padre es la raiz.
+                // n es la raiz.
+                // La reinicio.
+                _raiz = nullptr;
+            }
+            // Borro a n
+            delete(n);
+
+            // Decremento el cardinal
+            _cardinal--;
+            break;
         case 1:
             // El hijo pasa a ocupar el lugar del padre (n es el padre de hijos)
-            reemplazo = hijos[0];
+
+            // Si tenía padre, lo cambio por su reemplazo
+            if (padre != nullptr) {
+                if (n->valor < padre->valor) {
+                    padre->izq = hijos[0];
+                } else {
+                    padre->der = hijos[0];
+                }
+            } else {
+                // El unico momento en el que no tiene padre es la raiz.
+                // n es la raiz.
+                // La reinicio.
+                _raiz = hijos[0];
+            }
+            // Borro a n
+            delete(n);
+            // Decremento el cardinal
+            _cardinal--;
             break;
         case 2:
-            reemplazo = *_inmediato_sucesor(n);
-            break;
-        default:
-            // No es posible
+            Conjunto::Nodo* suc = _inmediato_sucesor(n);
+
+            // Warning: Medio ineficiente pero bueno
+            // Busco al sucesor para tener el recorrido
+            stack<Conjunto::Nodo*> recorrido_a_suc;
+            _buscar_con_pila(suc->valor, _raiz, recorrido_a_suc);
+
+            // Copio el valor del sucesor a n
+            n -> valor = suc -> valor;
+            // Lo borro
+            // Se que el reemplazo no tiene hijo izquierdo, pues no sería el sucesor.
+            // Hago un llamado recursivo sabiendo que va a entrar en el caso 1.
+            // A lo sumo su padre puede ser n.
+            // No decremento el cardinal porque ya se hace en el llamado recursivo.
+            _remover_nodo(suc, recorrido_a_suc);
             break;
     }
-
-    // Si tenía padre, lo cambio por su reemplazo
-    if (padre != nullptr) {
-        if (n->valor < padre->valor) {
-            padre->izq = reemplazo;
-        } else {
-            padre->der = reemplazo;
-        }
-    } else {
-        // El unico momento en el que no tiene padre es la raiz.
-        // n es la raiz.
-        // La reinicio.
-        _raiz = reemplazo;
-    }
-
-    // Borro a n
-    delete(n);
-
-    // Decremento el cardinal
-    _cardinal--;
 }
 
 template <class T>
 typename Conjunto<T>::Nodo* Conjunto<T>::_inmediato_sucesor(Conjunto<T>::Nodo* &n) {
     // Es el mas chico de los mas grandes
-    if (n->der == nullptr) {
-        return nullptr;
-    }
     return _minimo_desde(n->der);
 }
 
