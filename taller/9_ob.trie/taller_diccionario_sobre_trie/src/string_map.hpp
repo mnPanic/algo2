@@ -32,7 +32,7 @@ T& string_map<T>::_define_default(const string& clave) {
         _raiz = new Nodo();
     }
 
-    string_map::Nodo* actual = _raiz;
+    Nodo* actual = _raiz;
     for(char c : clave) {
         // Si no tengo siguiente, lo creo
         if (actual->siguientes[int(c)] == nullptr) {
@@ -65,7 +65,7 @@ bool string_map<T>::_contains(const string& clave) const {
     if (_raiz == nullptr) {
         return false;
     }
-    string_map::Nodo* actual = _raiz;
+    Nodo* actual = _raiz;
     // Recorro los caracteres de la palabra
     for(char c : clave) {
         actual = actual->siguientes[int(c)];
@@ -85,7 +85,7 @@ int string_map<T>::count(const string& clave) const{
 template <typename T>
 const T& string_map<T>::at(const string& clave) const {
     // Como ya se que está definido, simplemente recorro hasta que lo encuentro
-    string_map::Nodo* actual = _raiz;
+    Nodo* actual = _raiz;
     for(char c : clave) {
         actual = actual->siguientes[int(c)];
     }
@@ -95,7 +95,7 @@ const T& string_map<T>::at(const string& clave) const {
 template <typename T>
 T& string_map<T>::at(const string& clave) {
     // Como ya se que está definido, simplemente recorro hasta que lo encuentro
-    string_map::Nodo* actual = _raiz;
+    Nodo* actual = _raiz;
     for(char c : clave) {
         actual = actual->siguientes[int(c)];
     }
