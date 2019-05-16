@@ -96,6 +96,12 @@ private:
     // Esta clave tiene por definición el valor por defecto de T.
     // (i.e el que retorna el constructor por defecto)
     T& _define_default(const string &clave);
+
+    // Borra todos los nodos
+    void _borrar();
+
+    // Borra todos los nodos siguientes y sus siguientes
+    void _borrar_siguientes(Nodo* n);
 };
 
 #include "string_map.hpp"

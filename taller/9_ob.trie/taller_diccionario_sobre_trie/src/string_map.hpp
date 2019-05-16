@@ -12,7 +12,33 @@ string_map<T>& string_map<T>::operator=(const string_map<T>& d) {
 
 template <typename T>
 string_map<T>::~string_map(){
-    // COMPLETAR
+    _borrar();
+}
+
+template <class T>
+void string_map<T>::_borrar() {
+    // Borro todos los nodos
+    _borrar_siguientes(_raiz);
+
+    // Reseteo el size y la raiz
+    _size = 0;
+    _raiz = nullptr;
+}
+
+template <class T>
+void string_map<T>::_borrar_siguientes(string_map<T>::Nodo *n) {
+    // Si el nodo es null, no tengo que borrar nada
+    if (n == nullptr) {
+        return;
+    }
+
+    // Borro a los hijos y sus siguientes
+    for (Nodo* s : n->siguientes) {
+        _borrar_siguientes(s);
+    }
+
+    // Borro a n
+    delete(n);
 }
 
 template <typename T>
