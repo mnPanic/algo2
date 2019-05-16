@@ -107,6 +107,13 @@ private:
     // Supone que h no es null.
     // Supone que de h en adelante no hay definiciones (sino, hay leaks).
     void _copy_from(const Nodo* d, Nodo* h);
+
+    // Dice la cantidad de aristas (nodos siguientes no null) que tiene.
+    // Supone que n no es null.
+    int _aristas(const Nodo* n);
+
+    // Dice si un nodo tiene aristas.
+    bool _tiene_aristas(const Nodo* n);
 };
 
 #include "string_map.hpp"

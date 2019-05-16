@@ -169,7 +169,62 @@ T& string_map<T>::at(const string& clave) {
 
 template <typename T>
 void string_map<T>::erase(const string& clave) {
-    // COMPLETAR
+    // Supongo que la clave está definida.
+    // Eso implica que actual nunca es nullptr.
+
+    // Busco la clave guardandome cual es el ultimo nodo que
+    // no se debería eliminar.
+    // Este es aquel que tiene mas de una arista o tiene definición.
+    Nodo* actual = _raiz;
+    Nodo* ultimo = nullptr;
+    int indice_ultimo = -1;
+    for(int i = 0; i < clave.size(); i++) {
+        if(_tiene_aristas(actual) || actual->definicion != nullptr) {
+            ultimo = actual;
+            indice_ultimo = i;
+        }
+        actual = actual->siguientes[int(clave[i])];
+    }
+
+    // Estoy parado en el nodo que contiene el significado de la clave.
+    // Borro su definición
+    delete actual->definicion;
+    actual->definicion = nullptr;
+
+    // Si tiene aristas, no tengo que borrar el camino hacia el.
+    if (_tiene_aristas(actual)) {
+        return;
+    }
+
+    // Borro el camino de nodos hacia la clave a partir del siguiente al último nodo.
+    // Se que no hay ningún null en el camino hasta que termino.
+    actual = ultimo->siguientes[int(clave[indice_ultimo])];
+    for (int i = indice_ultimo+1; i < clave.size(); i++) {
+        // Guardo el actual para no perderlo
+        Nodo* tmp = actual;
+        // Actualizo el actual
+        actual = actual->siguientes[int(clave[i])];
+        // Se que los nodos no tienen definición, entonces
+        // los borro sin más.
+        delete(tmp);
+    }
+
+}
+
+template <class T>
+bool string_map<T>::_tiene_aristas(const Nodo* n) {
+    return _aristas(n) > 0;
+}
+
+template <class T>
+int string_map<T>::_aristas(const Nodo* n) {
+    int aristas = 0;
+    for (Nodo* sig : n->siguientes) {
+        if(sig != nullptr) {
+            aristas++;
+        }
+    }
+    return aristas;
 }
 
 template <typename T>
