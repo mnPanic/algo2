@@ -102,6 +102,11 @@ private:
 
     // Borra todos los nodos siguientes y sus siguientes
     void _borrar_siguientes(Nodo* n);
+
+    // Copia los nodos recorriendo desde el nodo d y copiando al nodo h.
+    // Supone que h no es null.
+    // Supone que de h en adelante no hay definiciones (sino, hay leaks).
+    void _copy_from(const Nodo* d, Nodo* h);
 };
 
 #include "string_map.hpp"

@@ -7,7 +7,46 @@ string_map<T>::string_map(const string_map<T>& aCopiar) : string_map() { *this =
 
 template <typename T>
 string_map<T>& string_map<T>::operator=(const string_map<T>& d) {
-    // COMPLETAR
+    // Borro el arbol actual
+    _borrar();
+
+    // Si tengo algo que copiar...
+    if (d._raiz != nullptr) {
+        // Creo una nueva raiz
+        _raiz = new Nodo();
+
+        // Copio los nodos de d
+        _copy_from(d._raiz, _raiz);
+    }
+    return *this;
+}
+
+
+template <class T>
+void string_map<T>::_copy_from(const Nodo* d, Nodo* h) {
+    // Copio la definicion
+    h->definicion = d->definicion;
+
+    // Copio los siguientes
+    for(int i = 0; i < d->siguientes.size(); i++) {
+        Nodo* d_sig_i = d->siguientes[i];
+
+        // Si el i-ésimo siguiente de d es null, continuo
+        if (d_sig_i == nullptr) {
+            continue;
+        }
+
+        // Como el siguiente no es null, entonces tengo que
+        // copiarlo al correspondiente en h.
+
+        // Si no está creado, lo creo
+        if(h->siguientes[i] == nullptr) {
+            h->siguientes[i] = new Nodo();
+        }
+
+        // Sigo copiando
+        _copy_from(d_sig_i, h->siguientes[i]);
+    }
 }
 
 template <typename T>
