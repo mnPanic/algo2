@@ -78,10 +78,24 @@ private:
     struct Nodo {
         vector<Nodo*> siguientes;
         T* definicion;
+        Nodo(): siguientes(256, nullptr),
+                definicion(nullptr) {}
+        Nodo(T* def): siguientes(256, nullptr),
+                      definicion(def) {}
     };
 
-    Nodo* raiz;
+    Nodo* _raiz;
     int _size;
+
+    // Retorna si la clave pertenece al mapa.
+    bool _contains(const string &clave) const;
+
+    // Define una clave nueva (creando los nodos intermedios)
+    // y retorna una referencia a la copia de su definición
+    // creada en el mapa.
+    // Esta clave tiene por definición el valor por defecto de T.
+    // (i.e el que retorna el constructor por defecto)
+    T& _define_default(const string &clave);
 };
 
 #include "string_map.hpp"
