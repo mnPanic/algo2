@@ -195,6 +195,7 @@ TEST(string_map_test, erase) {
 
     con_prefijos.erase("c");
     ASSERT_FALSE(con_prefijos.count("c") == 1);
+    ASSERT_TRUE(con_prefijos.size() == 2);
 
     ASSERT_TRUE(con_prefijos.count("casa") == 1);
     ASSERT_TRUE(con_prefijos.count("casona") == 1);

@@ -18,6 +18,10 @@ string_map<T>& string_map<T>::operator=(const string_map<T>& d) {
         // Copio los nodos de d
         _copy_from(d._raiz, _raiz);
     }
+
+    // Copio el size
+    _size = d._size;
+
     return *this;
 }
 
@@ -191,6 +195,9 @@ void string_map<T>::erase(const string& clave) {
     delete actual->definicion;
     actual->definicion = nullptr;
 
+    // Decremento el size
+    _size--;
+
     // Si tiene aristas, no tengo que borrar el camino hacia el.
     if (_tiene_aristas(actual)) {
         return;
@@ -208,7 +215,6 @@ void string_map<T>::erase(const string& clave) {
         // los borro sin más.
         delete(tmp);
     }
-
 }
 
 template <class T>
