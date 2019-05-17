@@ -28,8 +28,10 @@ string_map<T>& string_map<T>::operator=(const string_map<T>& d) {
 
 template <class T>
 void string_map<T>::_copy_from(const Nodo* d, Nodo* h) {
-    // Copio la definicion
-    h->definicion = d->definicion;
+    // Copio la definicion, si la hay
+    if (d->definicion) {
+        h->definicion = new T(*d->definicion);
+    }
 
     // Copio los siguientes
     for(int i = 0; i < d->siguientes.size(); i++) {
