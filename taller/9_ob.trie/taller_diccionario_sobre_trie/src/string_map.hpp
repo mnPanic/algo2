@@ -69,7 +69,7 @@ void string_map<T>::_borrar() {
 }
 
 template <class T>
-void string_map<T>::_borrar_siguientes(string_map<T>::Nodo *n) {
+void string_map<T>::_borrar_siguientes(Nodo* n) {
     // Si el nodo es null, no tengo que borrar nada
     if (n == nullptr) {
         return;
@@ -80,8 +80,12 @@ void string_map<T>::_borrar_siguientes(string_map<T>::Nodo *n) {
         _borrar_siguientes(s);
     }
 
+    // Borro la definición de n si tiene
+    if (n->definicion != nullptr) {
+        _borrar_def(n);
+    }
     // Borro a n
-    delete(n);
+    delete n;
 }
 
 template <typename T>
@@ -91,11 +95,14 @@ T& string_map<T>::operator[](const string& clave){
         return at(clave);
     }
 
+    // Si no está definido, le defino el valor por defecto.
     return _define_default(clave);
 }
 
 template <class T>
 T& string_map<T>::_define_default(const string& clave) {
+    // Supongo que la clave no está definida
+
     // Si no hay raiz, la creo
     if (_raiz == nullptr) {
         _raiz = new Nodo();
@@ -112,18 +119,13 @@ T& string_map<T>::_define_default(const string& clave) {
     }
 
     // Estoy parado en el nodo que va a tener la definición.
-    T* def = new T();
-    if (actual->definicion != nullptr) {
-        // Si estaba definido, borro la definición anterior
-        _borrar_def(actual);
-    }
     // Le asigno la nueva definición
-    actual->definicion = def;
+    actual->definicion = new T();
 
     // Incremento el size
     _size++;
 
-    return *def;
+    return *(actual->definicion);
 }
 
 template<class T>
