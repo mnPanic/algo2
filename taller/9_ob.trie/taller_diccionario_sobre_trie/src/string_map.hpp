@@ -115,8 +115,7 @@ T& string_map<T>::_define_default(const string& clave) {
     T* def = new T();
     if (actual->definicion != nullptr) {
         // Si estaba definido, borro la definición anterior
-        delete actual->definicion;
-
+        _borrar_def(actual);
     }
     // Le asigno la nueva definición
     actual->definicion = def;
@@ -126,6 +125,16 @@ T& string_map<T>::_define_default(const string& clave) {
 
     return *def;
 }
+
+template<class T>
+void string_map<T>::_borrar_def(Nodo* &n) {
+    // La borro
+    delete(n->definicion);
+
+    // La dejo en null
+    n->definicion = nullptr;
+}
+
 
 
 template <class T>
@@ -192,8 +201,7 @@ void string_map<T>::erase(const string& clave) {
 
     // Estoy parado en el nodo que contiene el significado de la clave.
     // Borro su definición
-    delete actual->definicion;
-    actual->definicion = nullptr;
+    _borrar_def(actual);
 
     // Decremento el size
     _size--;

@@ -114,6 +114,10 @@ private:
 
     // Dice si un nodo tiene aristas.
     bool _tiene_aristas(const Nodo* n);
+
+    // Borra la definición de un nodo
+    // y la setea en nullptr.
+    void _borrar_def(Nodo* &n);
 };
 
 #include "string_map.hpp"
