@@ -80,8 +80,6 @@ private:
         T* definicion;
         Nodo(): siguientes(256, nullptr),
                 definicion(nullptr) {}
-        Nodo(T* def): siguientes(256, nullptr),
-                      definicion(def) {}
     };
 
     Nodo* _raiz;
