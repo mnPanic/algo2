@@ -106,7 +106,11 @@ unsigned int DiccHash<V>::colisiones() const {
  */
 template<class V>
 unsigned int DiccHash<V>::fn_hash(const string& str) const {
-	// COMPLETAR
-	return 0;
+	// Función de hash de ejemplo de la clase.
+	int hash = 0;
+	for (char c : str) {
+		hash += 131 * int(c);
+	}
+	return hash % _tam;
 }
 
