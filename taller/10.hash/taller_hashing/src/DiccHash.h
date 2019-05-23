@@ -6,6 +6,8 @@
 #include <set>
 #include <list>
 #include <vector>
+#include <utility>
+
 
 using namespace std;
 
@@ -90,6 +92,8 @@ private:
     struct Asociacion {
             string clave;
             V valor;
+            Asociacion(): clave(""), valor(){}
+            Asociacion(string c, V v): clave(c), valor(v){}
     };
     vector<list<Asociacion>> _tabla;
     unsigned int _tam;
@@ -101,6 +105,21 @@ private:
     * Devuelve la posición de la tabla asociada a la clave dada.
     */
     unsigned int fn_hash(const string& str) const;
+
+    // Retorna un puntero a la asociación de una clave.
+    // o nullptr si no la hay
+    Asociacion* _obtener(const string& str) const;
+    // Busca en una lista de
+    Asociacion* _buscar_asociacion(const string &str, list<Asociacion> asociaciones) const;
+
+    // Redimensiona la tabla al doble de tamaño.
+    //  - Crear una tabla del doble de tamaño de la original.
+    //  - Insertar todas las claves de la tabla original en la tabla nueva.
+    //  - Liberar la memoria reservada para la tabla original.
+    void _redimensionar();
+
+    // Retorna las asociaciones del diccionario.
+    vector<Asociacion> _asociaciones() const;
 };
 
 #include "DiccHash.hpp"

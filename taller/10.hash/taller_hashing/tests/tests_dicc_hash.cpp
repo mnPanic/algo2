@@ -140,7 +140,7 @@ TEST(DiccHash, colisiones_uniforme) {
     DiccHash<int> dh;
 
     char delim = '\n';
-    std::string archnom = "data/uniforme.txt";
+    std::string archnom = "../data/uniforme.txt";
 
     int val = 0;
     string str;
@@ -169,7 +169,7 @@ TEST(DiccHash, colisiones_gaussiana) {
     DiccHash<int> dh;
 
     char delim = '\n';
-    std::string archnom = "data/gauss.txt";
+    std::string archnom = "../data/gauss.txt";
 
     int val = 0;
     string str;
@@ -199,7 +199,7 @@ TEST(DiccHash, colisiones_libretas) {
     DiccHash<int> dh;
 
     char delim = '\n';
-    std::string archnom = "data/libretas.txt";
+    std::string archnom = "../data/libretas.txt";
 
     int val = 0;
     string str;
@@ -227,7 +227,7 @@ TEST(DiccHash, redimensionado) {
     DiccHash<int> dh;
 
     char delim = '\n';
-    std::string archnom = "data/uniforme.txt";
+    std::string archnom = "../data/uniforme.txt";
 
     unsigned int val = 0;
     string str;
