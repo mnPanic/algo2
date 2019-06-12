@@ -1,10 +1,10 @@
 
 template<class T>
-ColaPrior<T>::ColaPrior(): elementos(), tamano(0) {}
+ColaPrior<T>::ColaPrior(): elementos() {}
 
 template<class T>
 int ColaPrior<T>::tam() const {
-	return tamano;
+	return int(elementos.size());
 }
 
 template<class T>
@@ -13,9 +13,6 @@ void ColaPrior<T>::encolar(const T& elem) {
     elementos.push_back(elem);
     // Le aplico sift up
     sift_up(ultima_pos());
-
-    // Incremento el tamaño
-    tamano++;
 }
 
 template<class T>
@@ -109,7 +106,7 @@ int ColaPrior<T>::sift_down_next(int elem_idx) const {
 
 template <class T>
 int ColaPrior<T>::ultima_pos() const {
-    return int(elementos.size()) - 1;
+    return tam() - 1;
 }
 
 template <class T>

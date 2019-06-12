@@ -37,7 +37,6 @@ public:
 
 private:
 	vector<T> elementos;
-	int tamano;
 
 	// Siftea el elemento hacia arriba hasta que está bien ubicado
 	void sift_up(int elem_idx);
