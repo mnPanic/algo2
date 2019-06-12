@@ -30,27 +30,23 @@ void ColaPrior<T>::desencolar() {
 
     // Lo sifteo para abajo
     sift_down(0);
-
-    // Decremento el tamaño
-    tamano--;
 }
 
 template<class T>
 ColaPrior<T>::ColaPrior(const vector<T>& elems) {
     // Algoritmo simple: Agrego todos devuelta
-    for (T elem : elems) {
-        encolar(elem);
-    }
+    //for (T elem : elems) {
+    //    encolar(elem);
+    //}
 
 	// Heapify: Interpreto el arreglo como un heap, y le aplico
 	// sift down a todos los elementos, recorriendolos de abajo para arriba.
 
-	// Me copio el tamaño y los elementos
-	//tamano = int(elems.size()) - 1;
-	//elementos = elems;
-	//for (int i = ultima_pos(); i > 0; i--) {
-	//    sift_down(i);
-	//}
+	// Me copio los elementos
+	elementos = elems;
+	for (int i = ultima_pos(); i >= 0; i--) {
+	    sift_down(i);
+	}
 }
 
 template <class T>
