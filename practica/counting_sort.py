@@ -2,7 +2,7 @@
 from typing import List
 from typing import Callable
 
-def counting_sort(a: List[int], key: Callable=None):
+def counting_sort(a: List[int], key: Callable=lambda x:x):
     """
     Sorts a with the counting sort algorithm.
     Complexity: O(n + max(a))
@@ -11,9 +11,8 @@ def counting_sort(a: List[int], key: Callable=None):
     m = key(max(a, key=key))        # O(n)
     counts = [(0, None)] * (m + 1)         
     for n in a:                     # O(n)
-        idx = n if key is None else key(n)
-        counts[idx] = (
-            counts[idx][0] + 1,
+        counts[key(n)] = (
+            counts[key(n)][0] + 1,
             n
         )
 
