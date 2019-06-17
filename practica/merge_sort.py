@@ -2,22 +2,24 @@
 
 from typing import List
 from typing import Any
+from typing import Callable
 
-def merge_sort(a: List[Any]):
+def merge_sort(a: List[Any], key: Callable=lambda x:x) -> List[Any]:
     """
     Sorts the given list with the merge sort algorithm.
     Complexity: O(n * log n)
     """
     if len(a) == 1:
         return a
-    
+
     half = int((len(a) + 1) / 2)
     return merge(
-        merge_sort(a[0:half]),
-        merge_sort(a[half:len(a)])
+        merge_sort(a[0:half], key),
+        merge_sort(a[half:len(a)], key),
+        key
     )
 
-def merge(a: List[Any], b: List[Any]) -> List[Any]:
+def merge(a: List[Any], b: List[Any], key: Callable=lambda x:x) -> List[Any]:
     """
     Merges two ordered lists, keeping the order.
     Compexity: O(length of longest list)
@@ -35,7 +37,7 @@ def merge(a: List[Any], b: List[Any]) -> List[Any]:
             res.append(a[a_idx])
             a_idx+=1
         # Recorro de a pares, si es menor el de a, agrego ese, sino el de b
-        elif a[a_idx] <= b[b_idx]:
+        elif key(a[a_idx]) <= key(b[b_idx]):
             res.append(a[a_idx])
             a_idx+=1
         else:
