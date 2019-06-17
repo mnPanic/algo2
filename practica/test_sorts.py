@@ -16,11 +16,11 @@ def merge_test():
     print(res)
 
 def merge_sort_test():
-    arr = [8, 5, 45, 12, 43, 12, 0, 8, 9, 4, 5, 7, 23, 123]
+    arr = [[8, 2, 3], [5, 2, 3], [45, 2, 3], [12, 2, 3], [43, 2, 3], [12, 2, 3], [0, 2, 3], [8, 2, 3], [9, 2, 3], [4, 2, 3], [5, 2, 3], [7, 2, 3], [23, 2, 3]]
 
-    res = merge_sort(arr)
+    res = merge_sort(arr, key=lambda x: x[0])
 
     print(res)
 
 if __name__ == "__main__":
-    counting_sort_test()
+    merge_sort_test()
