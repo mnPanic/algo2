@@ -24,7 +24,7 @@ def _insert(a, i: int):
         i -= 1
     return a
 
-def my_min():
+def my_min(i, j):
     return 0
 
 @presentar
@@ -87,5 +87,5 @@ def heapsort(a):
     return a
 
 #@presentar
-def mergesort(lista):
+def mergesort(a):
     return a
