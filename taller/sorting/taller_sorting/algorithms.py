@@ -2,7 +2,7 @@ from list_algorithms import presentar
 import random
 import time
 
-grupo= 'queremos listas' 
+grupo= 'chocolate' 
 
 # ATENCION: 
 #- descomentar el "@presentar" y dejarlo solamente en las implementaciones de los algoritmos a entregar
