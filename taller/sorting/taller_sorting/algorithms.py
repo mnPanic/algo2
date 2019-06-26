@@ -33,7 +33,7 @@ def quicksort(a):
         return a
 
     # Elijo un pivote
-    pivot = _find_pivot_index(a) # O(1)
+    pivot = _random_pivot_index(a) # O(1)
 
     # Hago que el pivote quede en el medio
     # Me guardo el nuevo pivote
@@ -42,13 +42,17 @@ def quicksort(a):
     # Ordeno cada mitad con quicksort
     return quicksort(a[:pivot]) + quicksort(a[pivot:])
 
-def _find_pivot_index(a):
+def _random_pivot_index(a):
     """Encuentra el indice que corresponde al pivote en el arreglo."""
     # Por ahora random a ver que onda
     return random.randint(
         1,
         len(a) - 2,
     )
+
+def _half_pivot(a):
+    """Retorna como pivote el medio."""
+    return int((len(a) - 1) / 2)
 
 def _order_by_pivot(a, pivot:int):
     """
