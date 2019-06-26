@@ -2,7 +2,7 @@ from list_algorithms import presentar
 import random
 import time
 
-grupo= 'elegir nombre copado y no usar unicode' 
+grupo= 'queremos listas' 
 
 # ATENCION: 
 #- descomentar el "@presentar" y dejarlo solamente en las implementaciones de los algoritmos a entregar
@@ -36,10 +36,7 @@ def selection_sort(a):
 @presentar
 def quicksort(a):
     """Ordena a `a` con el algoritmo quicksort."""
-    if len(a) < 3:
-        # Los swapeo de ser necesario
-        if len(a) == 2 and a[0] > a[1]:
-            a[0], a[1] = a[1], a[0]
+    if len(a) < 2:
         return a
 
     # Elijo un pivote
@@ -54,10 +51,9 @@ def quicksort(a):
 
 def _random_pivot_index(a):
     """Encuentra el indice que corresponde al pivote en el arreglo."""
-    # Por ahora random a ver que onda
     return random.randint(
-        1,
-        len(a) - 2,
+        0,
+        len(a) - 1,
     )
 
 def _half_pivot(a):
