@@ -12,6 +12,16 @@ grupo= 'elegir nombre copado y no usar unicode'
 
 @presentar
 def insertion_sort(a):
+    for i in range(len(a)):
+        _insert(a, i)
+    
+    return a
+
+def _insert(a, i: int):
+    # Recorro hacia atrás, swapeando hasta que se mantenga el orden
+    while i > 0 and a[i] < a[i - 1]:
+        a[i], a[i - 1] = a[i - 1], a[i]
+        i -= 1
     return a
 
 def my_min():
