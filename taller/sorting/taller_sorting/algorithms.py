@@ -27,7 +27,7 @@ def _insert(a, i: int):
 def my_min(i, j):
     return 0
 
-@presentar
+#@presentar
 def selection_sort(a):	
     for i in range(len(a)):
         a[i] = my_min(i+1, len(a))
